@@ -66,6 +66,12 @@ artifacts/
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
 
+#vcpkg
+vcpkg_installed/
+
+#LibreOffice files
+*.ods
+
 # StyleCop
 StyleCopReport.xml
 
