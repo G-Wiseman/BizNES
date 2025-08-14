@@ -14,6 +14,12 @@ TTF_Font* font;
 
 int main()
 {
+    Bus bus = Bus();
+    mos6502 cpu = mos6502(&bus);
+    for (size_t i = 0; i <= 0xff; i++) {
+        
+    }
+    
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         cout << "error with init " << endl;
         printf("Error with init %s \n", SDL_GetError());
@@ -67,7 +73,7 @@ int main()
         TTF_DrawRendererText(text, 20, 20); 
 
         SDL_RenderPresent(renderer);
-        TTF_DestroyText(text);
+        TTF_DestroyText(text); 
     }
     TTF_DestroyRendererTextEngine(text_engine);
     SDL_DestroyWindow(window); 

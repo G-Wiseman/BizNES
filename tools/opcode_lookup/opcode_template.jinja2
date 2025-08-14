@@ -1,0 +1,23 @@
+#include "mos6502.h"
+#include "Bus.h"
+#include <array>
+#include <cstdint>
+#include <iostream>
+
+void mos6502::opcode_table_gen() {
+	using cpu = mos6502;
+    {% for opcode in opcodes %}
+    opcode_lookup[{{opcode.opcode}}] = Opcode(
+        "{{opcode.mnemonic}}",
+        Opcode::AddrMode::{{opcode.address_mode}}, 
+        std::bind(&cpu::{{opcode.address_mode}}, this),
+        std::bind(&cpu::{{opcode.mnemonic}}, this),
+        uint8_t({{opcode.cycles_needed}}),
+        {% if opcode.extra_cycle -%}
+        true
+        {%- else -%}
+        false
+        {%- endif %}
+    );
+    {% endfor %}
+}

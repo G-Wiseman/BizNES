@@ -2,6 +2,7 @@
 # and include sub-projects here.
 #
 cmake_minimum_required (VERSION 3.8)
+enable_testing()
 
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
@@ -12,4 +13,5 @@ endif()
 project ("NES_Emulator")
 
 # Include sub-projects.
-add_subdirectory ("NES_Emulator")
+add_subdirectory ("src")
+add_subdirectory ("tests")
