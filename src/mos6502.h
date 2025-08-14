@@ -30,7 +30,7 @@ public:
     };
 
 
-    std::string name; 
+    const char* name; 
     AddrMode address_mode_enum;
     std::function<uint16_t()> address_mode; // function pointer TODO: Is it better to use c++'s functional header? Do more reading on this
     std::function<uint8_t()> instruction;
@@ -45,7 +45,7 @@ public:
         extra_cycle_possible(false) {}
 
     Opcode(
-        std::string name,
+        char* name,
         AddrMode addr_enum,
         std::function<uint16_t()> addr,
         std::function<uint8_t()> inst,
