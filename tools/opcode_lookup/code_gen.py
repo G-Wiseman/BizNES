@@ -23,16 +23,15 @@ with open("../opcodes.csv", "r") as f:
     dat_frame = pd.read_csv(f, header=0)
 
 opcodes = []
-with open("out.cpp", "w+") as f:
-    for row in dat_frame.itertuples():
-        full_code = {
-            "address_mode": MODES_MAP[row[1]], 
-            "mnemonic": row[2][0:3],
-            "opcode": ("0x" + row[3]), 
-            "cycles_needed": row[5][0], 
-            "extra_cycle": (row[5][1:] != "")
-        }
-        opcodes.append(full_code)
+for row in dat_frame.itertuples():
+    full_code = {
+        "address_mode": MODES_MAP[row[1]], 
+        "mnemonic": row[2][0:3],
+        "opcode": ("0x" + row[3]), 
+        "cycles_needed": row[5][0], 
+        "extra_cycle": (row[5][1:] != "")
+    }
+    opcodes.append(full_code)
 opcodes = sorted(opcodes, key=lambda x: x["opcode"])
 
 # Set up the Jinja2 environment to load templates from the current directory

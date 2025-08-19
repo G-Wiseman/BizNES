@@ -4,10 +4,11 @@
 #include <cstdint>
 #include <iostream>
 
-void mos6502::opcode_table_gen() {
-	using cpu = mos6502;
+
+const std::array<Opcode, 0xff> mos6502::opcode_lookup = [] {
+    std::array<Opcode, 0xff> table{}; 
     {% for opcode in opcodes %}
-    opcode_lookup[{{opcode.opcode}}] = Opcode(
+    table[{{opcode.opcode}}] = Opcode(
         "{{opcode.mnemonic}}",
         Opcode::AddrMode::{{opcode.address_mode}}, 
         &cpu::{{opcode.address_mode}},
@@ -20,4 +21,5 @@ void mos6502::opcode_table_gen() {
         {%- endif %}
     );
     {% endfor %}
-}
+    return table;
+}();

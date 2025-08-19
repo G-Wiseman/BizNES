@@ -16,7 +16,6 @@
 
 mos6502::mos6502(Bus* b) {
     bus = b;
-    opcode_table_gen();
 }
 
 mos6502::~mos6502()

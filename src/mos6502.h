@@ -26,7 +26,7 @@ private:
     // internal variables 
     bool address_was_implied = false;
 
-    Opcode* cur_opcode = nullptr; 
+    const Opcode* cur_opcode = nullptr; 
     uint8_t opcode_byte = 0x00;
     uint8_t cycles_remaining = 0;
     uint16_t convenience = 0x0000; // unsigned 16bit temporay variable solely for convenience
@@ -34,7 +34,7 @@ private:
     uint8_t value = 0x00; // Value returned after fetch  ing a byte from memory (use with ALU)
 
 public:
-    std::array<Opcode, 0xff> opcode_lookup;
+    static const std::array<Opcode, 256> opcode_lookup;
 
     enum STATUS_FLAG_MASKS {
         // https://www.nesdev.org/wiki/Status_flags#The_B_flag
@@ -50,7 +50,6 @@ public:
     bool getFlag(STATUS_FLAG_MASKS flag);
     void setFlag(STATUS_FLAG_MASKS flag, bool value);
     uint8_t fetch_value();
-    void opcode_table_gen();
     void branch(bool condition); // reuse most of the branching logic for each branch opcode
     void push_stack(uint8_t data);
     uint8_t pull_stack();
