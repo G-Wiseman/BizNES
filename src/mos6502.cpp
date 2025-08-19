@@ -16,7 +16,6 @@
 
 mos6502::mos6502(Bus* b) {
     bus = b;
-    using a = mos6502; 
     opcode_table_gen();
 }
 
@@ -59,17 +58,6 @@ uint8_t mos6502::fetch_value() {
     return read(address);
 };
 
-void mos6502::page_crossed() {
-    // this is called when a page boundary is crossed by an addressing mode 
-    // will handle adding the extra cycle required. But ONLY when the opcode also requires
-    // an extra cycle. 
-    if (opcode_lookup[opcode_byte].extra_cycle_possible) {
-        read(0x0000); // read & discard something, just for cycle queueing purposes?
-        cycles_remaining++;
-    }
-
-}
-
 void mos6502::branch(bool condition) {
     if (condition) {
         cycles_remaining++;
@@ -105,6 +93,14 @@ void mos6502::trigger_interrupt(uint16_t lo_vector, uint16_t hi_vector) {
     setFlag(I, true);
 }
 
+uint16_t mos6502::execute_addressing(const Opcode& op){
+    return (this->*op.address_mode)();
+}
+uint8_t mos6502::execute_instruction(const Opcode& op) {
+    return (this->*op.instruction)();
+}
+
+
 void mos6502::clock_cycle() {
     // This should be once for each cpu clock cycle being performed. 
 
@@ -114,25 +110,23 @@ void mos6502::clock_cycle() {
         opcode_byte = read(pc); 
         pc++;
         // decode what address mode AND operation it is.
-        Opcode* opcode = &opcode_lookup[opcode_byte];
+        cur_opcode = &opcode_lookup[opcode_byte];
         
         // determine how many cycles it will take.
         // FIXME: This does not currently account for the instruction that have variable cycle counts 
         // See : "oops" page-carrying at https://www.nesdev.org/wiki/CPU_addressing_modes
         // Also see : ex. BCS can take TWO extra cycles?? 
-        cycles_remaining = opcode->num_cycles;
+        cycles_remaining = cur_opcode->num_cycles;
 
         // address will increment the pc an appropriate amount 
         // then it will fetch the addressed value 
         // in 6502 cpu, the ALU only acts on 1 fetched at a time
         // this value will be store in fetched_value
         address_was_implied = false; // set this false every loop. Only changed to true by implied address modes (implicit & accumulator) 
-        opcode->address_mode();
+        address = execute_addressing(*cur_opcode);
         
         // operate ON the value that is stored in fetched_value
-        opcode->instruction(); 
-        // TODO: This runs a full operation all at once, make a queue to make it cycle accurate 
-
+        execute_instruction(*cur_opcode);
     }
     cycles_remaining--; 
 
@@ -275,7 +269,7 @@ uint16_t mos6502::IndirectY_addr() {
     uint16_t base_address = lo | (static_cast<uint16_t>(hi) << 8);
     address = base_address + y; // indirect indexing by y here
     bool page_crossed = (base_address & 0xff00) != (address & 0xff00);
-    if (page_crossed && opcode_lookup[opcode_byte].extra_cycle_possible) {
+    if (page_crossed && cur_opcode->extra_cycle_possible) {
         internal_work(); // already correctly stored the correct address, just dummy here
     }
         
@@ -352,8 +346,7 @@ uint8_t mos6502::AND() {
 
 
 uint8_t mos6502::ASL() { 
-    Opcode::AddrMode addr_type = opcode_lookup[opcode_byte].address_mode_enum;
-    if (addr_type == Opcode::AddrMode::AbsoluteX_addr) {
+    if (cur_opcode->address_mode_enum == Opcode::AddrMode::AbsoluteX_addr) {
         internal_work();
     }
 
@@ -486,8 +479,7 @@ uint8_t mos6502::CPY() {
 
 // Decremennt Memory
 uint8_t mos6502::DEC() { 
-    Opcode::AddrMode addr_type = opcode_lookup[opcode_byte].address_mode_enum;
-    if (addr_type == Opcode::AddrMode::AbsoluteX_addr) {
+    if (cur_opcode->address_mode_enum == Opcode::AddrMode::AbsoluteX_addr) {
         internal_work();
     }
     value = fetch_value();
@@ -533,8 +525,7 @@ uint8_t mos6502::EOR() {
 
 // increment Memory
 uint8_t mos6502::INC() {
-    Opcode::AddrMode addr_type = opcode_lookup[opcode_byte].address_mode_enum;
-    if (addr_type == Opcode::AddrMode::AbsoluteX_addr) {
+    if (cur_opcode->address_mode_enum == Opcode::AddrMode::AbsoluteX_addr) {
         internal_work();
     }
 
@@ -612,8 +603,7 @@ uint8_t mos6502::LDY() {
 
 // Logical Shift Right 
 uint8_t mos6502::LSR() {
-    Opcode::AddrMode addr_type = opcode_lookup[opcode_byte].address_mode_enum;
-    if (addr_type == Opcode::AddrMode::AbsoluteX_addr) {
+    if (cur_opcode->address_mode_enum == Opcode::AddrMode::AbsoluteX_addr) {
         internal_work();
     }
 
@@ -673,8 +663,7 @@ uint8_t mos6502::PLP() {
 
 // Rotate Left. Bit 0 is whatever the current carry flag is. New carry flag is the old Bit 7.
 uint8_t mos6502::ROL() {
-    Opcode::AddrMode addr_type = opcode_lookup[opcode_byte].address_mode_enum;
-    if (addr_type == Opcode::AddrMode::AbsoluteX_addr) {
+    if (cur_opcode->address_mode_enum == Opcode::AddrMode::AbsoluteX_addr) {
         internal_work();
     }
 
@@ -695,8 +684,7 @@ uint8_t mos6502::ROL() {
     return 0;
 }
 uint8_t mos6502::ROR() { 
-    Opcode::AddrMode addr_type = opcode_lookup[opcode_byte].address_mode_enum;
-    if (addr_type == Opcode::AddrMode::AbsoluteX_addr) {
+    if (cur_opcode->address_mode_enum == Opcode::AddrMode::AbsoluteX_addr) {
         internal_work();
     }
 
@@ -771,8 +759,7 @@ uint8_t mos6502::SEI() {
 
 
 uint8_t mos6502::STA() { 
-    Opcode::AddrMode addr_type = opcode_lookup[opcode_byte].address_mode_enum;
-    switch (addr_type) {
+    switch (cur_opcode->address_mode_enum) {
         case Opcode::AddrMode::AbsoluteX_addr:
         case Opcode::AddrMode::AbsoluteY_addr:
         case Opcode::AddrMode::IndirectY_addr:

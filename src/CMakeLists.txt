@@ -5,8 +5,9 @@
 # Add source to this project's executable.
 add_library(NES_core
     "Bus.cpp" "Bus.h" 
-    "mos6502.cpp" "mos6502.h" 
-    "opcode_lookup.cpp"
+    "mos6502.cpp" "mos6502.h"
+    "opcode.h" "opcode.cpp"
+    "opcode_lookup.cpp" 
 )
 
 add_executable (NES_Emulator "NES_Emulator.cpp" "NES_Emulator.h" )

@@ -1,5 +1,6 @@
 #pragma once
 #include <stdlib.h>
+#include "opcode.h"
 #include <stdio.h>
 #include <vector>
 #include <array>
@@ -7,60 +8,8 @@
 #include <stdint.h>
 #include <string>
 
+
 class Bus; // forward declaration that allows cpu to know that bus will exist
-class mos6502; 
-
-class Opcode
-{
-public:
-    enum class AddrMode {
-        Absolute_addr,
-        AbsoluteX_addr,
-        Implicit_addr,
-        Immediate_addr,
-        Indirect_addr,
-        IndirectX_addr,
-        AbsoluteY_addr,
-        Accumulator_addr,
-        Relative_addr,
-        ZeroPage_addr,
-        IndirectY_addr,
-        ZeroPageX_addr,
-        ZeroPageY_addr
-    };
-
-
-    const char* name; 
-    AddrMode address_mode_enum;
-    std::function<uint16_t()> address_mode; // function pointer TODO: Is it better to use c++'s functional header? Do more reading on this
-    std::function<uint8_t()> instruction;
-    uint8_t num_cycles;
-    bool extra_cycle_possible; 
-    Opcode() :
-        name("ILG"), 
-        address_mode_enum(AddrMode::Absolute_addr),
-        address_mode([]() -> uint16_t { return 0; }),
-        instruction([]() -> uint8_t { return 0; }),
-        num_cycles(2), 
-        extra_cycle_possible(false) {}
-
-    Opcode(
-        char* name,
-        AddrMode addr_enum,
-        std::function<uint16_t()> addr,
-        std::function<uint8_t()> inst,
-        uint8_t num_cycles, 
-        bool ecp=false
-    ): name(name),
-        address_mode_enum(addr_enum),
-        address_mode(addr), 
-        instruction(inst),
-        num_cycles(num_cycles),
-        extra_cycle_possible(ecp) {};
-
-private:
-
-};
 
 class mos6502
 {
@@ -76,11 +25,13 @@ private:
     
     // internal variables 
     bool address_was_implied = false;
+
+    Opcode* cur_opcode = nullptr; 
     uint8_t opcode_byte = 0x00;
     uint8_t cycles_remaining = 0;
     uint16_t convenience = 0x0000; // unsigned 16bit temporay variable solely for convenience
     uint16_t address = 0x0000; // internal variable to store addressing mode results in. 
-    uint8_t value = 0x00; // Value returned after fetching a byte from memory (use with ALU)
+    uint8_t value = 0x00; // Value returned after fetch  ing a byte from memory (use with ALU)
 
 public:
     std::array<Opcode, 0xff> opcode_lookup;
@@ -99,11 +50,13 @@ public:
     bool getFlag(STATUS_FLAG_MASKS flag);
     void setFlag(STATUS_FLAG_MASKS flag, bool value);
     uint8_t fetch_value();
-    void page_crossed(); // Called when a page is crossed by an address. Will handle logic to check if an extra cycle is required and handle adding the cycle. 
     void opcode_table_gen();
     void branch(bool condition); // reuse most of the branching logic for each branch opcode
     void push_stack(uint8_t data);
-    uint8_t pull_stack(); 
+    uint8_t pull_stack();
+
+    uint16_t execute_addressing(const Opcode& op);
+    uint8_t execute_instruction(const Opcode& op);
 
 
     mos6502(Bus* b);

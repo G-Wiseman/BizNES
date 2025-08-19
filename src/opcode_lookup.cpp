@@ -10,8 +10,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x0] = Opcode(
         "BRK",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::BRK, this),
+        &cpu::Implicit_addr,
+        &cpu::BRK,
         uint8_t(7),
         false
     );
@@ -19,8 +19,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x0A] = Opcode(
         "ASL",
         Opcode::AddrMode::Accumulator_addr, 
-        std::bind(&cpu::Accumulator_addr, this),
-        std::bind(&cpu::ASL, this),
+        &cpu::Accumulator_addr,
+        &cpu::ASL,
         uint8_t(2),
         false
     );
@@ -28,8 +28,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x0D] = Opcode(
         "ORA",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::ORA, this),
+        &cpu::Absolute_addr,
+        &cpu::ORA,
         uint8_t(4),
         false
     );
@@ -37,8 +37,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x0E] = Opcode(
         "ASL",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::ASL, this),
+        &cpu::Absolute_addr,
+        &cpu::ASL,
         uint8_t(6),
         false
     );
@@ -46,8 +46,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x1] = Opcode(
         "ORA",
         Opcode::AddrMode::IndirectX_addr, 
-        std::bind(&cpu::IndirectX_addr, this),
-        std::bind(&cpu::ORA, this),
+        &cpu::IndirectX_addr,
+        &cpu::ORA,
         uint8_t(6),
         false
     );
@@ -55,8 +55,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x10] = Opcode(
         "BPL",
         Opcode::AddrMode::Relative_addr, 
-        std::bind(&cpu::Relative_addr, this),
-        std::bind(&cpu::BPL, this),
+        &cpu::Relative_addr,
+        &cpu::BPL,
         uint8_t(2),
         true
     );
@@ -64,8 +64,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x11] = Opcode(
         "ORA",
         Opcode::AddrMode::IndirectY_addr, 
-        std::bind(&cpu::IndirectY_addr, this),
-        std::bind(&cpu::ORA, this),
+        &cpu::IndirectY_addr,
+        &cpu::ORA,
         uint8_t(5),
         true
     );
@@ -73,8 +73,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x15] = Opcode(
         "ORA",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::ORA, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::ORA,
         uint8_t(4),
         false
     );
@@ -82,8 +82,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x16] = Opcode(
         "ASL",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::ASL, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::ASL,
         uint8_t(6),
         false
     );
@@ -91,8 +91,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x18] = Opcode(
         "CLC",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::CLC, this),
+        &cpu::Implicit_addr,
+        &cpu::CLC,
         uint8_t(2),
         false
     );
@@ -100,8 +100,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x19] = Opcode(
         "ORA",
         Opcode::AddrMode::AbsoluteY_addr, 
-        std::bind(&cpu::AbsoluteY_addr, this),
-        std::bind(&cpu::ORA, this),
+        &cpu::AbsoluteY_addr,
+        &cpu::ORA,
         uint8_t(4),
         true
     );
@@ -109,8 +109,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x1D] = Opcode(
         "ORA",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::ORA, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::ORA,
         uint8_t(4),
         true
     );
@@ -118,8 +118,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x1E] = Opcode(
         "ASL",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::ASL, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::ASL,
         uint8_t(7),
         false
     );
@@ -127,8 +127,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x20] = Opcode(
         "JSR",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::JSR, this),
+        &cpu::Absolute_addr,
+        &cpu::JSR,
         uint8_t(6),
         false
     );
@@ -136,8 +136,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x21] = Opcode(
         "AND",
         Opcode::AddrMode::IndirectX_addr, 
-        std::bind(&cpu::IndirectX_addr, this),
-        std::bind(&cpu::AND, this),
+        &cpu::IndirectX_addr,
+        &cpu::AND,
         uint8_t(6),
         false
     );
@@ -145,8 +145,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x24] = Opcode(
         "BIT",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::BIT, this),
+        &cpu::ZeroPage_addr,
+        &cpu::BIT,
         uint8_t(3),
         false
     );
@@ -154,8 +154,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x25] = Opcode(
         "AND",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::AND, this),
+        &cpu::ZeroPage_addr,
+        &cpu::AND,
         uint8_t(3),
         false
     );
@@ -163,8 +163,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x26] = Opcode(
         "ROL",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::ROL, this),
+        &cpu::ZeroPage_addr,
+        &cpu::ROL,
         uint8_t(5),
         false
     );
@@ -172,8 +172,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x28] = Opcode(
         "PLP",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::PLP, this),
+        &cpu::Implicit_addr,
+        &cpu::PLP,
         uint8_t(4),
         false
     );
@@ -181,8 +181,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x29] = Opcode(
         "AND",
         Opcode::AddrMode::Immediate_addr, 
-        std::bind(&cpu::Immediate_addr, this),
-        std::bind(&cpu::AND, this),
+        &cpu::Immediate_addr,
+        &cpu::AND,
         uint8_t(2),
         false
     );
@@ -190,8 +190,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x2A] = Opcode(
         "ROL",
         Opcode::AddrMode::Accumulator_addr, 
-        std::bind(&cpu::Accumulator_addr, this),
-        std::bind(&cpu::ROL, this),
+        &cpu::Accumulator_addr,
+        &cpu::ROL,
         uint8_t(2),
         false
     );
@@ -199,8 +199,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x2C] = Opcode(
         "BIT",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::BIT, this),
+        &cpu::Absolute_addr,
+        &cpu::BIT,
         uint8_t(4),
         false
     );
@@ -208,8 +208,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x2D] = Opcode(
         "AND",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::AND, this),
+        &cpu::Absolute_addr,
+        &cpu::AND,
         uint8_t(4),
         false
     );
@@ -217,8 +217,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x2E] = Opcode(
         "ROL",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::ROL, this),
+        &cpu::Absolute_addr,
+        &cpu::ROL,
         uint8_t(6),
         false
     );
@@ -226,8 +226,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x30] = Opcode(
         "BMI",
         Opcode::AddrMode::Relative_addr, 
-        std::bind(&cpu::Relative_addr, this),
-        std::bind(&cpu::BMI, this),
+        &cpu::Relative_addr,
+        &cpu::BMI,
         uint8_t(2),
         true
     );
@@ -235,8 +235,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x31] = Opcode(
         "AND",
         Opcode::AddrMode::IndirectY_addr, 
-        std::bind(&cpu::IndirectY_addr, this),
-        std::bind(&cpu::AND, this),
+        &cpu::IndirectY_addr,
+        &cpu::AND,
         uint8_t(5),
         true
     );
@@ -244,8 +244,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x35] = Opcode(
         "AND",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::AND, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::AND,
         uint8_t(4),
         false
     );
@@ -253,8 +253,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x36] = Opcode(
         "ROL",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::ROL, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::ROL,
         uint8_t(6),
         false
     );
@@ -262,8 +262,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x38] = Opcode(
         "SEC",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::SEC, this),
+        &cpu::Implicit_addr,
+        &cpu::SEC,
         uint8_t(2),
         false
     );
@@ -271,8 +271,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x39] = Opcode(
         "AND",
         Opcode::AddrMode::AbsoluteY_addr, 
-        std::bind(&cpu::AbsoluteY_addr, this),
-        std::bind(&cpu::AND, this),
+        &cpu::AbsoluteY_addr,
+        &cpu::AND,
         uint8_t(4),
         true
     );
@@ -280,8 +280,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x3D] = Opcode(
         "AND",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::AND, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::AND,
         uint8_t(4),
         true
     );
@@ -289,8 +289,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x3E] = Opcode(
         "ROL",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::ROL, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::ROL,
         uint8_t(7),
         false
     );
@@ -298,8 +298,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x40] = Opcode(
         "RTI",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::RTI, this),
+        &cpu::Implicit_addr,
+        &cpu::RTI,
         uint8_t(6),
         false
     );
@@ -307,8 +307,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x41] = Opcode(
         "EOR",
         Opcode::AddrMode::IndirectX_addr, 
-        std::bind(&cpu::IndirectX_addr, this),
-        std::bind(&cpu::EOR, this),
+        &cpu::IndirectX_addr,
+        &cpu::EOR,
         uint8_t(6),
         false
     );
@@ -316,8 +316,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x45] = Opcode(
         "EOR",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::EOR, this),
+        &cpu::ZeroPage_addr,
+        &cpu::EOR,
         uint8_t(3),
         false
     );
@@ -325,8 +325,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x46] = Opcode(
         "LSR",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::LSR, this),
+        &cpu::ZeroPage_addr,
+        &cpu::LSR,
         uint8_t(5),
         false
     );
@@ -334,8 +334,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x48] = Opcode(
         "PHA",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::PHA, this),
+        &cpu::Implicit_addr,
+        &cpu::PHA,
         uint8_t(3),
         false
     );
@@ -343,8 +343,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x49] = Opcode(
         "EOR",
         Opcode::AddrMode::Immediate_addr, 
-        std::bind(&cpu::Immediate_addr, this),
-        std::bind(&cpu::EOR, this),
+        &cpu::Immediate_addr,
+        &cpu::EOR,
         uint8_t(2),
         false
     );
@@ -352,8 +352,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x4A] = Opcode(
         "LSR",
         Opcode::AddrMode::Accumulator_addr, 
-        std::bind(&cpu::Accumulator_addr, this),
-        std::bind(&cpu::LSR, this),
+        &cpu::Accumulator_addr,
+        &cpu::LSR,
         uint8_t(2),
         false
     );
@@ -361,8 +361,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x4C] = Opcode(
         "JMP",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::JMP, this),
+        &cpu::Absolute_addr,
+        &cpu::JMP,
         uint8_t(3),
         false
     );
@@ -370,8 +370,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x4D] = Opcode(
         "EOR",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::EOR, this),
+        &cpu::Absolute_addr,
+        &cpu::EOR,
         uint8_t(4),
         false
     );
@@ -379,8 +379,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x4E] = Opcode(
         "LSR",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::LSR, this),
+        &cpu::Absolute_addr,
+        &cpu::LSR,
         uint8_t(6),
         false
     );
@@ -388,8 +388,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x5] = Opcode(
         "ORA",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::ORA, this),
+        &cpu::ZeroPage_addr,
+        &cpu::ORA,
         uint8_t(3),
         false
     );
@@ -397,8 +397,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x50] = Opcode(
         "BVC",
         Opcode::AddrMode::Relative_addr, 
-        std::bind(&cpu::Relative_addr, this),
-        std::bind(&cpu::BVC, this),
+        &cpu::Relative_addr,
+        &cpu::BVC,
         uint8_t(2),
         true
     );
@@ -406,8 +406,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x51] = Opcode(
         "EOR",
         Opcode::AddrMode::IndirectY_addr, 
-        std::bind(&cpu::IndirectY_addr, this),
-        std::bind(&cpu::EOR, this),
+        &cpu::IndirectY_addr,
+        &cpu::EOR,
         uint8_t(5),
         true
     );
@@ -415,8 +415,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x55] = Opcode(
         "EOR",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::EOR, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::EOR,
         uint8_t(4),
         false
     );
@@ -424,8 +424,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x56] = Opcode(
         "LSR",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::LSR, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::LSR,
         uint8_t(6),
         false
     );
@@ -433,8 +433,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x58] = Opcode(
         "CLI",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::CLI, this),
+        &cpu::Implicit_addr,
+        &cpu::CLI,
         uint8_t(2),
         false
     );
@@ -442,8 +442,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x59] = Opcode(
         "EOR",
         Opcode::AddrMode::AbsoluteY_addr, 
-        std::bind(&cpu::AbsoluteY_addr, this),
-        std::bind(&cpu::EOR, this),
+        &cpu::AbsoluteY_addr,
+        &cpu::EOR,
         uint8_t(4),
         true
     );
@@ -451,8 +451,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x5D] = Opcode(
         "EOR",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::EOR, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::EOR,
         uint8_t(4),
         true
     );
@@ -460,8 +460,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x5E] = Opcode(
         "LSR",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::LSR, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::LSR,
         uint8_t(7),
         false
     );
@@ -469,8 +469,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x6] = Opcode(
         "ASL",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::ASL, this),
+        &cpu::ZeroPage_addr,
+        &cpu::ASL,
         uint8_t(5),
         false
     );
@@ -478,8 +478,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x60] = Opcode(
         "RTS",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::RTS, this),
+        &cpu::Implicit_addr,
+        &cpu::RTS,
         uint8_t(6),
         false
     );
@@ -487,8 +487,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x61] = Opcode(
         "ADC",
         Opcode::AddrMode::IndirectX_addr, 
-        std::bind(&cpu::IndirectX_addr, this),
-        std::bind(&cpu::ADC, this),
+        &cpu::IndirectX_addr,
+        &cpu::ADC,
         uint8_t(6),
         false
     );
@@ -496,8 +496,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x65] = Opcode(
         "ADC",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::ADC, this),
+        &cpu::ZeroPage_addr,
+        &cpu::ADC,
         uint8_t(3),
         false
     );
@@ -505,8 +505,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x66] = Opcode(
         "ROR",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::ROR, this),
+        &cpu::ZeroPage_addr,
+        &cpu::ROR,
         uint8_t(5),
         false
     );
@@ -514,8 +514,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x68] = Opcode(
         "PLA",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::PLA, this),
+        &cpu::Implicit_addr,
+        &cpu::PLA,
         uint8_t(4),
         false
     );
@@ -523,8 +523,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x69] = Opcode(
         "ADC",
         Opcode::AddrMode::Immediate_addr, 
-        std::bind(&cpu::Immediate_addr, this),
-        std::bind(&cpu::ADC, this),
+        &cpu::Immediate_addr,
+        &cpu::ADC,
         uint8_t(2),
         false
     );
@@ -532,8 +532,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x6A] = Opcode(
         "ROR",
         Opcode::AddrMode::Accumulator_addr, 
-        std::bind(&cpu::Accumulator_addr, this),
-        std::bind(&cpu::ROR, this),
+        &cpu::Accumulator_addr,
+        &cpu::ROR,
         uint8_t(2),
         false
     );
@@ -541,8 +541,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x6C] = Opcode(
         "JMP",
         Opcode::AddrMode::Indirect_addr, 
-        std::bind(&cpu::Indirect_addr, this),
-        std::bind(&cpu::JMP, this),
+        &cpu::Indirect_addr,
+        &cpu::JMP,
         uint8_t(5),
         false
     );
@@ -550,8 +550,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x6D] = Opcode(
         "ADC",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::ADC, this),
+        &cpu::Absolute_addr,
+        &cpu::ADC,
         uint8_t(4),
         false
     );
@@ -559,8 +559,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x6E] = Opcode(
         "ROR",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::ROR, this),
+        &cpu::Absolute_addr,
+        &cpu::ROR,
         uint8_t(6),
         false
     );
@@ -568,8 +568,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x70] = Opcode(
         "BVS",
         Opcode::AddrMode::Relative_addr, 
-        std::bind(&cpu::Relative_addr, this),
-        std::bind(&cpu::BVS, this),
+        &cpu::Relative_addr,
+        &cpu::BVS,
         uint8_t(2),
         true
     );
@@ -577,8 +577,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x71] = Opcode(
         "ADC",
         Opcode::AddrMode::IndirectY_addr, 
-        std::bind(&cpu::IndirectY_addr, this),
-        std::bind(&cpu::ADC, this),
+        &cpu::IndirectY_addr,
+        &cpu::ADC,
         uint8_t(5),
         true
     );
@@ -586,8 +586,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x75] = Opcode(
         "ADC",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::ADC, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::ADC,
         uint8_t(4),
         false
     );
@@ -595,8 +595,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x76] = Opcode(
         "ROR",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::ROR, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::ROR,
         uint8_t(6),
         false
     );
@@ -604,8 +604,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x78] = Opcode(
         "SEI",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::SEI, this),
+        &cpu::Implicit_addr,
+        &cpu::SEI,
         uint8_t(2),
         false
     );
@@ -613,8 +613,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x79] = Opcode(
         "ADC",
         Opcode::AddrMode::AbsoluteY_addr, 
-        std::bind(&cpu::AbsoluteY_addr, this),
-        std::bind(&cpu::ADC, this),
+        &cpu::AbsoluteY_addr,
+        &cpu::ADC,
         uint8_t(4),
         true
     );
@@ -622,8 +622,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x7D] = Opcode(
         "ADC",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::ADC, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::ADC,
         uint8_t(4),
         true
     );
@@ -631,8 +631,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x7E] = Opcode(
         "ROR",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::ROR, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::ROR,
         uint8_t(7),
         false
     );
@@ -640,8 +640,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x8] = Opcode(
         "PHP",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::PHP, this),
+        &cpu::Implicit_addr,
+        &cpu::PHP,
         uint8_t(3),
         false
     );
@@ -649,8 +649,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x81] = Opcode(
         "STA",
         Opcode::AddrMode::IndirectX_addr, 
-        std::bind(&cpu::IndirectX_addr, this),
-        std::bind(&cpu::STA, this),
+        &cpu::IndirectX_addr,
+        &cpu::STA,
         uint8_t(6),
         false
     );
@@ -658,8 +658,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x84] = Opcode(
         "STY",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::STY, this),
+        &cpu::ZeroPage_addr,
+        &cpu::STY,
         uint8_t(3),
         false
     );
@@ -667,8 +667,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x85] = Opcode(
         "STA",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::STA, this),
+        &cpu::ZeroPage_addr,
+        &cpu::STA,
         uint8_t(3),
         false
     );
@@ -676,8 +676,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x86] = Opcode(
         "STX",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::STX, this),
+        &cpu::ZeroPage_addr,
+        &cpu::STX,
         uint8_t(3),
         false
     );
@@ -685,8 +685,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x88] = Opcode(
         "DEY",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::DEY, this),
+        &cpu::Implicit_addr,
+        &cpu::DEY,
         uint8_t(2),
         false
     );
@@ -694,8 +694,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x8A] = Opcode(
         "TXA",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::TXA, this),
+        &cpu::Implicit_addr,
+        &cpu::TXA,
         uint8_t(2),
         false
     );
@@ -703,8 +703,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x8C] = Opcode(
         "STY",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::STY, this),
+        &cpu::Absolute_addr,
+        &cpu::STY,
         uint8_t(4),
         false
     );
@@ -712,8 +712,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x8D] = Opcode(
         "STA",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::STA, this),
+        &cpu::Absolute_addr,
+        &cpu::STA,
         uint8_t(4),
         false
     );
@@ -721,8 +721,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x8E] = Opcode(
         "STX",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::STX, this),
+        &cpu::Absolute_addr,
+        &cpu::STX,
         uint8_t(4),
         false
     );
@@ -730,8 +730,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x9] = Opcode(
         "ORA",
         Opcode::AddrMode::Immediate_addr, 
-        std::bind(&cpu::Immediate_addr, this),
-        std::bind(&cpu::ORA, this),
+        &cpu::Immediate_addr,
+        &cpu::ORA,
         uint8_t(2),
         false
     );
@@ -739,8 +739,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x90] = Opcode(
         "BCC",
         Opcode::AddrMode::Relative_addr, 
-        std::bind(&cpu::Relative_addr, this),
-        std::bind(&cpu::BCC, this),
+        &cpu::Relative_addr,
+        &cpu::BCC,
         uint8_t(2),
         true
     );
@@ -748,8 +748,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x91] = Opcode(
         "STA",
         Opcode::AddrMode::IndirectY_addr, 
-        std::bind(&cpu::IndirectY_addr, this),
-        std::bind(&cpu::STA, this),
+        &cpu::IndirectY_addr,
+        &cpu::STA,
         uint8_t(6),
         false
     );
@@ -757,8 +757,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x94] = Opcode(
         "STY",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::STY, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::STY,
         uint8_t(4),
         false
     );
@@ -766,8 +766,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x95] = Opcode(
         "STA",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::STA, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::STA,
         uint8_t(4),
         false
     );
@@ -775,8 +775,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x96] = Opcode(
         "STX",
         Opcode::AddrMode::ZeroPageY_addr, 
-        std::bind(&cpu::ZeroPageY_addr, this),
-        std::bind(&cpu::STX, this),
+        &cpu::ZeroPageY_addr,
+        &cpu::STX,
         uint8_t(4),
         false
     );
@@ -784,8 +784,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x98] = Opcode(
         "TYA",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::TYA, this),
+        &cpu::Implicit_addr,
+        &cpu::TYA,
         uint8_t(2),
         false
     );
@@ -793,8 +793,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x99] = Opcode(
         "STA",
         Opcode::AddrMode::AbsoluteY_addr, 
-        std::bind(&cpu::AbsoluteY_addr, this),
-        std::bind(&cpu::STA, this),
+        &cpu::AbsoluteY_addr,
+        &cpu::STA,
         uint8_t(5),
         false
     );
@@ -802,8 +802,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x9A] = Opcode(
         "TXS",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::TXS, this),
+        &cpu::Implicit_addr,
+        &cpu::TXS,
         uint8_t(2),
         false
     );
@@ -811,8 +811,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0x9D] = Opcode(
         "STA",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::STA, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::STA,
         uint8_t(5),
         false
     );
@@ -820,8 +820,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xA0] = Opcode(
         "LDY",
         Opcode::AddrMode::Immediate_addr, 
-        std::bind(&cpu::Immediate_addr, this),
-        std::bind(&cpu::LDY, this),
+        &cpu::Immediate_addr,
+        &cpu::LDY,
         uint8_t(2),
         false
     );
@@ -829,8 +829,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xA1] = Opcode(
         "LDA",
         Opcode::AddrMode::IndirectX_addr, 
-        std::bind(&cpu::IndirectX_addr, this),
-        std::bind(&cpu::LDA, this),
+        &cpu::IndirectX_addr,
+        &cpu::LDA,
         uint8_t(6),
         false
     );
@@ -838,8 +838,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xA2] = Opcode(
         "LDX",
         Opcode::AddrMode::Immediate_addr, 
-        std::bind(&cpu::Immediate_addr, this),
-        std::bind(&cpu::LDX, this),
+        &cpu::Immediate_addr,
+        &cpu::LDX,
         uint8_t(2),
         false
     );
@@ -847,8 +847,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xA4] = Opcode(
         "LDY",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::LDY, this),
+        &cpu::ZeroPage_addr,
+        &cpu::LDY,
         uint8_t(3),
         false
     );
@@ -856,8 +856,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xA5] = Opcode(
         "LDA",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::LDA, this),
+        &cpu::ZeroPage_addr,
+        &cpu::LDA,
         uint8_t(3),
         false
     );
@@ -865,8 +865,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xA6] = Opcode(
         "LDX",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::LDX, this),
+        &cpu::ZeroPage_addr,
+        &cpu::LDX,
         uint8_t(3),
         false
     );
@@ -874,8 +874,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xA8] = Opcode(
         "TAY",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::TAY, this),
+        &cpu::Implicit_addr,
+        &cpu::TAY,
         uint8_t(2),
         false
     );
@@ -883,8 +883,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xA9] = Opcode(
         "LDA",
         Opcode::AddrMode::Immediate_addr, 
-        std::bind(&cpu::Immediate_addr, this),
-        std::bind(&cpu::LDA, this),
+        &cpu::Immediate_addr,
+        &cpu::LDA,
         uint8_t(2),
         false
     );
@@ -892,8 +892,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xAA] = Opcode(
         "TAX",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::TAX, this),
+        &cpu::Implicit_addr,
+        &cpu::TAX,
         uint8_t(2),
         false
     );
@@ -901,8 +901,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xAC] = Opcode(
         "LDY",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::LDY, this),
+        &cpu::Absolute_addr,
+        &cpu::LDY,
         uint8_t(4),
         false
     );
@@ -910,8 +910,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xAD] = Opcode(
         "LDA",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::LDA, this),
+        &cpu::Absolute_addr,
+        &cpu::LDA,
         uint8_t(4),
         false
     );
@@ -919,8 +919,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xAE] = Opcode(
         "LDX",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::LDX, this),
+        &cpu::Absolute_addr,
+        &cpu::LDX,
         uint8_t(4),
         false
     );
@@ -928,8 +928,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xB0] = Opcode(
         "BCS",
         Opcode::AddrMode::Relative_addr, 
-        std::bind(&cpu::Relative_addr, this),
-        std::bind(&cpu::BCS, this),
+        &cpu::Relative_addr,
+        &cpu::BCS,
         uint8_t(2),
         true
     );
@@ -937,8 +937,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xB1] = Opcode(
         "LDA",
         Opcode::AddrMode::IndirectY_addr, 
-        std::bind(&cpu::IndirectY_addr, this),
-        std::bind(&cpu::LDA, this),
+        &cpu::IndirectY_addr,
+        &cpu::LDA,
         uint8_t(5),
         true
     );
@@ -946,8 +946,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xB4] = Opcode(
         "LDY",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::LDY, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::LDY,
         uint8_t(4),
         false
     );
@@ -955,8 +955,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xB5] = Opcode(
         "LDA",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::LDA, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::LDA,
         uint8_t(4),
         false
     );
@@ -964,8 +964,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xB6] = Opcode(
         "LDX",
         Opcode::AddrMode::ZeroPageY_addr, 
-        std::bind(&cpu::ZeroPageY_addr, this),
-        std::bind(&cpu::LDX, this),
+        &cpu::ZeroPageY_addr,
+        &cpu::LDX,
         uint8_t(4),
         false
     );
@@ -973,8 +973,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xB8] = Opcode(
         "CLV",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::CLV, this),
+        &cpu::Implicit_addr,
+        &cpu::CLV,
         uint8_t(2),
         false
     );
@@ -982,8 +982,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xB9] = Opcode(
         "LDA",
         Opcode::AddrMode::AbsoluteY_addr, 
-        std::bind(&cpu::AbsoluteY_addr, this),
-        std::bind(&cpu::LDA, this),
+        &cpu::AbsoluteY_addr,
+        &cpu::LDA,
         uint8_t(4),
         true
     );
@@ -991,8 +991,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xBA] = Opcode(
         "TSX",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::TSX, this),
+        &cpu::Implicit_addr,
+        &cpu::TSX,
         uint8_t(2),
         false
     );
@@ -1000,8 +1000,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xBC] = Opcode(
         "LDY",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::LDY, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::LDY,
         uint8_t(4),
         true
     );
@@ -1009,8 +1009,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xBD] = Opcode(
         "LDA",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::LDA, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::LDA,
         uint8_t(4),
         true
     );
@@ -1018,8 +1018,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xBE] = Opcode(
         "LDX",
         Opcode::AddrMode::AbsoluteY_addr, 
-        std::bind(&cpu::AbsoluteY_addr, this),
-        std::bind(&cpu::LDX, this),
+        &cpu::AbsoluteY_addr,
+        &cpu::LDX,
         uint8_t(4),
         true
     );
@@ -1027,8 +1027,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xC0] = Opcode(
         "CPY",
         Opcode::AddrMode::Immediate_addr, 
-        std::bind(&cpu::Immediate_addr, this),
-        std::bind(&cpu::CPY, this),
+        &cpu::Immediate_addr,
+        &cpu::CPY,
         uint8_t(2),
         false
     );
@@ -1036,8 +1036,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xC1] = Opcode(
         "CMP",
         Opcode::AddrMode::IndirectX_addr, 
-        std::bind(&cpu::IndirectX_addr, this),
-        std::bind(&cpu::CMP, this),
+        &cpu::IndirectX_addr,
+        &cpu::CMP,
         uint8_t(6),
         false
     );
@@ -1045,8 +1045,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xC4] = Opcode(
         "CPY",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::CPY, this),
+        &cpu::ZeroPage_addr,
+        &cpu::CPY,
         uint8_t(3),
         false
     );
@@ -1054,8 +1054,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xC5] = Opcode(
         "CMP",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::CMP, this),
+        &cpu::ZeroPage_addr,
+        &cpu::CMP,
         uint8_t(3),
         false
     );
@@ -1063,8 +1063,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xC6] = Opcode(
         "DEC",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::DEC, this),
+        &cpu::ZeroPage_addr,
+        &cpu::DEC,
         uint8_t(5),
         false
     );
@@ -1072,8 +1072,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xC8] = Opcode(
         "INY",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::INY, this),
+        &cpu::Implicit_addr,
+        &cpu::INY,
         uint8_t(2),
         false
     );
@@ -1081,8 +1081,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xC9] = Opcode(
         "CMP",
         Opcode::AddrMode::Immediate_addr, 
-        std::bind(&cpu::Immediate_addr, this),
-        std::bind(&cpu::CMP, this),
+        &cpu::Immediate_addr,
+        &cpu::CMP,
         uint8_t(2),
         false
     );
@@ -1090,8 +1090,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xCA] = Opcode(
         "DEX",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::DEX, this),
+        &cpu::Implicit_addr,
+        &cpu::DEX,
         uint8_t(2),
         false
     );
@@ -1099,8 +1099,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xCC] = Opcode(
         "CPY",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::CPY, this),
+        &cpu::Absolute_addr,
+        &cpu::CPY,
         uint8_t(4),
         false
     );
@@ -1108,8 +1108,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xCD] = Opcode(
         "CMP",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::CMP, this),
+        &cpu::Absolute_addr,
+        &cpu::CMP,
         uint8_t(4),
         false
     );
@@ -1117,8 +1117,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xCE] = Opcode(
         "DEC",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::DEC, this),
+        &cpu::Absolute_addr,
+        &cpu::DEC,
         uint8_t(6),
         false
     );
@@ -1126,8 +1126,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xD0] = Opcode(
         "BNE",
         Opcode::AddrMode::Relative_addr, 
-        std::bind(&cpu::Relative_addr, this),
-        std::bind(&cpu::BNE, this),
+        &cpu::Relative_addr,
+        &cpu::BNE,
         uint8_t(2),
         true
     );
@@ -1135,8 +1135,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xD1] = Opcode(
         "CMP",
         Opcode::AddrMode::IndirectY_addr, 
-        std::bind(&cpu::IndirectY_addr, this),
-        std::bind(&cpu::CMP, this),
+        &cpu::IndirectY_addr,
+        &cpu::CMP,
         uint8_t(5),
         true
     );
@@ -1144,8 +1144,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xD5] = Opcode(
         "CMP",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::CMP, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::CMP,
         uint8_t(4),
         false
     );
@@ -1153,8 +1153,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xD6] = Opcode(
         "DEC",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::DEC, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::DEC,
         uint8_t(6),
         false
     );
@@ -1162,8 +1162,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xD8] = Opcode(
         "CLD",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::CLD, this),
+        &cpu::Implicit_addr,
+        &cpu::CLD,
         uint8_t(2),
         false
     );
@@ -1171,8 +1171,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xD9] = Opcode(
         "CMP",
         Opcode::AddrMode::AbsoluteY_addr, 
-        std::bind(&cpu::AbsoluteY_addr, this),
-        std::bind(&cpu::CMP, this),
+        &cpu::AbsoluteY_addr,
+        &cpu::CMP,
         uint8_t(4),
         true
     );
@@ -1180,8 +1180,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xDD] = Opcode(
         "CMP",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::CMP, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::CMP,
         uint8_t(4),
         true
     );
@@ -1189,8 +1189,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xDE] = Opcode(
         "DEC",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::DEC, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::DEC,
         uint8_t(7),
         false
     );
@@ -1198,8 +1198,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xE0] = Opcode(
         "CPX",
         Opcode::AddrMode::Immediate_addr, 
-        std::bind(&cpu::Immediate_addr, this),
-        std::bind(&cpu::CPX, this),
+        &cpu::Immediate_addr,
+        &cpu::CPX,
         uint8_t(2),
         false
     );
@@ -1207,8 +1207,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xE1] = Opcode(
         "SBC",
         Opcode::AddrMode::IndirectX_addr, 
-        std::bind(&cpu::IndirectX_addr, this),
-        std::bind(&cpu::SBC, this),
+        &cpu::IndirectX_addr,
+        &cpu::SBC,
         uint8_t(6),
         false
     );
@@ -1216,8 +1216,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xE4] = Opcode(
         "CPX",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::CPX, this),
+        &cpu::ZeroPage_addr,
+        &cpu::CPX,
         uint8_t(3),
         false
     );
@@ -1225,8 +1225,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xE5] = Opcode(
         "SBC",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::SBC, this),
+        &cpu::ZeroPage_addr,
+        &cpu::SBC,
         uint8_t(3),
         false
     );
@@ -1234,8 +1234,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xE6] = Opcode(
         "INC",
         Opcode::AddrMode::ZeroPage_addr, 
-        std::bind(&cpu::ZeroPage_addr, this),
-        std::bind(&cpu::INC, this),
+        &cpu::ZeroPage_addr,
+        &cpu::INC,
         uint8_t(5),
         false
     );
@@ -1243,8 +1243,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xE8] = Opcode(
         "INX",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::INX, this),
+        &cpu::Implicit_addr,
+        &cpu::INX,
         uint8_t(2),
         false
     );
@@ -1252,8 +1252,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xE9] = Opcode(
         "SBC",
         Opcode::AddrMode::Immediate_addr, 
-        std::bind(&cpu::Immediate_addr, this),
-        std::bind(&cpu::SBC, this),
+        &cpu::Immediate_addr,
+        &cpu::SBC,
         uint8_t(2),
         false
     );
@@ -1261,8 +1261,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xEA] = Opcode(
         "NOP",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::NOP, this),
+        &cpu::Implicit_addr,
+        &cpu::NOP,
         uint8_t(2),
         false
     );
@@ -1270,8 +1270,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xEC] = Opcode(
         "CPX",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::CPX, this),
+        &cpu::Absolute_addr,
+        &cpu::CPX,
         uint8_t(4),
         false
     );
@@ -1279,8 +1279,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xED] = Opcode(
         "SBC",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::SBC, this),
+        &cpu::Absolute_addr,
+        &cpu::SBC,
         uint8_t(4),
         false
     );
@@ -1288,8 +1288,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xEE] = Opcode(
         "INC",
         Opcode::AddrMode::Absolute_addr, 
-        std::bind(&cpu::Absolute_addr, this),
-        std::bind(&cpu::INC, this),
+        &cpu::Absolute_addr,
+        &cpu::INC,
         uint8_t(6),
         false
     );
@@ -1297,8 +1297,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xF0] = Opcode(
         "BEQ",
         Opcode::AddrMode::Relative_addr, 
-        std::bind(&cpu::Relative_addr, this),
-        std::bind(&cpu::BEQ, this),
+        &cpu::Relative_addr,
+        &cpu::BEQ,
         uint8_t(2),
         true
     );
@@ -1306,8 +1306,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xF1] = Opcode(
         "SBC",
         Opcode::AddrMode::IndirectY_addr, 
-        std::bind(&cpu::IndirectY_addr, this),
-        std::bind(&cpu::SBC, this),
+        &cpu::IndirectY_addr,
+        &cpu::SBC,
         uint8_t(5),
         true
     );
@@ -1315,8 +1315,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xF5] = Opcode(
         "SBC",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::SBC, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::SBC,
         uint8_t(4),
         false
     );
@@ -1324,8 +1324,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xF6] = Opcode(
         "INC",
         Opcode::AddrMode::ZeroPageX_addr, 
-        std::bind(&cpu::ZeroPageX_addr, this),
-        std::bind(&cpu::INC, this),
+        &cpu::ZeroPageX_addr,
+        &cpu::INC,
         uint8_t(6),
         false
     );
@@ -1333,8 +1333,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xF8] = Opcode(
         "SED",
         Opcode::AddrMode::Implicit_addr, 
-        std::bind(&cpu::Implicit_addr, this),
-        std::bind(&cpu::SED, this),
+        &cpu::Implicit_addr,
+        &cpu::SED,
         uint8_t(2),
         false
     );
@@ -1342,8 +1342,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xF9] = Opcode(
         "SBC",
         Opcode::AddrMode::AbsoluteY_addr, 
-        std::bind(&cpu::AbsoluteY_addr, this),
-        std::bind(&cpu::SBC, this),
+        &cpu::AbsoluteY_addr,
+        &cpu::SBC,
         uint8_t(4),
         true
     );
@@ -1351,8 +1351,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xFD] = Opcode(
         "SBC",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::SBC, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::SBC,
         uint8_t(4),
         true
     );
@@ -1360,8 +1360,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[0xFE] = Opcode(
         "INC",
         Opcode::AddrMode::AbsoluteX_addr, 
-        std::bind(&cpu::AbsoluteX_addr, this),
-        std::bind(&cpu::INC, this),
+        &cpu::AbsoluteX_addr,
+        &cpu::INC,
         uint8_t(7),
         false
     );

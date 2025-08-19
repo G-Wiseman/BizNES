@@ -10,8 +10,8 @@ void mos6502::opcode_table_gen() {
     opcode_lookup[{{opcode.opcode}}] = Opcode(
         "{{opcode.mnemonic}}",
         Opcode::AddrMode::{{opcode.address_mode}}, 
-        std::bind(&cpu::{{opcode.address_mode}}, this),
-        std::bind(&cpu::{{opcode.mnemonic}}, this),
+        &cpu::{{opcode.address_mode}},
+        &cpu::{{opcode.mnemonic}},
         uint8_t({{opcode.cycles_needed}}),
         {% if opcode.extra_cycle -%}
         true

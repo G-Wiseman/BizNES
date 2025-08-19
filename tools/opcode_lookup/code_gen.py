@@ -19,7 +19,7 @@ MODES_MAP = {
 
 # This csv was created by cutting info directly from 
 # https://www.masswerk.at/6502/6502_instruction_set.html
-with open("opcodes.csv", "r") as f: 
+with open("../opcodes.csv", "r") as f: 
     dat_frame = pd.read_csv(f, header=0)
 
 opcodes = []
@@ -48,5 +48,5 @@ data_dict = {
 generated_code = template.render(data_dict)
 
 # Save or print the generated code
-with open('../opcode_lookup.cpp', 'w') as f:
+with open('opcode_lookup.cpp', 'w') as f:
     f.write(generated_code)
