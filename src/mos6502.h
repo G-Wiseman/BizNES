@@ -47,8 +47,24 @@ public:
         V = 1 << 6, // Overflow. See the docs for now. 
         N = 1 << 7, // Negative. after instructions that have a value result, this will contain bit 7
     };
+
+    // Getters and Setters
     bool getFlag(STATUS_FLAG_MASKS flag);
     void setFlag(STATUS_FLAG_MASKS flag, bool value);
+    
+    uint16_t getPC();
+    void setPC(uint16_t newpc);
+    
+    uint8_t getAccumulator();
+    void setAccumulator(uint8_t newa);
+    
+    uint8_t getXReg();
+    void setXReg(uint8_t newx);
+    
+    uint8_t getYReg();
+    void setYReg(uint8_t newx);
+
+
     uint8_t fetch_value();
     void branch(bool condition); // reuse most of the branching logic for each branch opcode
     void push_stack(uint8_t data);
@@ -57,7 +73,7 @@ public:
     uint16_t execute_addressing(const Opcode& op);
     uint8_t execute_instruction(const Opcode& op);
 
-
+    mos6502();
     mos6502(Bus* b);
     ~mos6502();
     uint8_t read(uint16_t addr);
@@ -68,6 +84,7 @@ public:
     void masked_interrupt();
     void non_masked_interrupt();
     void trigger_interrupt(uint16_t lo_vector, uint16_t hi_vector);
+    void step(); // complete one full instruction
 
     // address modes
     uint16_t Accumulator_addr(); // accumulator address

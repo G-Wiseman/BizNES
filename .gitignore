@@ -69,6 +69,9 @@ ScaffoldingReadMe.txt
 #vcpkg
 vcpkg_installed/
 
+#ROMs
+assets/ROMs
+
 #LibreOffice files
 *.ods
 

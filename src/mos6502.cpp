@@ -14,6 +14,10 @@
 #define NMI_VECTOR_LO 0xFFFA
 #define NMI_VECTOR_HI 0xFFFB
 
+mos6502::mos6502() {
+    bus = nullptr;
+}
+
 mos6502::mos6502(Bus* b) {
     bus = b;
 }
@@ -38,17 +42,50 @@ void mos6502::internal_work() {
 }
 
 bool mos6502::getFlag(STATUS_FLAG_MASKS flag) {
-    return ((status & flag) == 1);
-}
+    return (status & flag);
+}    
 
 void mos6502::setFlag(STATUS_FLAG_MASKS flag, bool value) {
     if (value) {
         status |= flag; 
     }
     else {
-        status &= ~flag;
+        status &= ~flag; 
     }
 }
+
+uint16_t mos6502::getPC() {
+    return pc;
+}
+
+void mos6502::setPC(uint16_t newpc) {
+    pc = newpc;
+}
+
+uint8_t mos6502::getAccumulator() {
+    return a;
+}
+
+void mos6502::setAccumulator(uint8_t newa) {
+    a = newa;
+}
+
+uint8_t mos6502::getXReg() {
+    return x;
+}
+
+void mos6502::setXReg(uint8_t newx) {
+    x = newx;
+}
+
+uint8_t mos6502::getYReg() {
+    return y;
+}
+
+void mos6502::setYReg(uint8_t newy) {
+    y = newy;
+}
+
 
 uint8_t mos6502::fetch_value() {
     if (address_was_implied) {
@@ -160,6 +197,13 @@ void mos6502::non_masked_interrupt() {
     trigger_interrupt(NMI_VECTOR_LO, NMI_VECTOR_HI);
 };
 
+void mos6502::step() {
+    clock_cycle();
+    while (cycles_remaining != 0) {
+        clock_cycle();
+    }
+}
+
 /*
 ADDRESS MODE FUNCTIONS HERE
 */
@@ -177,7 +221,7 @@ uint16_t mos6502::Absolute_addr() {
     // highbyte of address
     address |= static_cast<uint16_t>(read(pc)) << 8;
     pc++;
-    return 0; 
+    return address; 
 }
 // absolute indexed with X
 uint16_t mos6502::AbsoluteX_addr() { 
@@ -191,7 +235,7 @@ uint16_t mos6502::AbsoluteX_addr() {
     address += x;
     // if page_crossed 
         // internal_work() or read()?
-    return 0;
+    return address;
 }
 // absolute indexed with Y 
 uint16_t mos6502::AbsoluteY_addr() { 
@@ -213,7 +257,7 @@ uint16_t mos6502::Immediate_addr() {
     address_was_implied = false;
     address = pc; 
     pc++; 
-    return 0; 
+    return address;
 }
 // implicit address 
 uint16_t mos6502::Implicit_addr() { 
@@ -282,7 +326,7 @@ uint16_t mos6502::Relative_addr() {
     int8_t offset = static_cast<int8_t>(read(pc));
     pc++;
     address = pc + offset; 
-    return 0;
+    return address;
 }
 
 // zero page no index
