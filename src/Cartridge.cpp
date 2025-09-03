@@ -1,3 +1,5 @@
+#include "Cartridge.h"
+#include "Cartridge.h"
 #pragma once
 #include "Cartridge.h"
 #include "Bus.h"
@@ -46,7 +48,7 @@ Cartridge::~Cartridge()
 {
 }
 
-uint8_t Cartridge::read(uint16_t addr) {
+uint8_t Cartridge::cpuRead(uint16_t addr) {
     if (addr >= 0x8000 && addr <= 0xFFFF) {
         size_t mapped_addr;
 
@@ -64,5 +66,20 @@ uint8_t Cartridge::read(uint16_t addr) {
 
     // If address is outside cartridge range, return open bus
     return 0xFF;
+}
+
+void Cartridge::cpuWrite(uint16_t addr, uint8_t value) {
+    // TODO: Finish this function
+    return;
+}
+
+uint8_t Cartridge::ppuRead(uint16_t addr)
+{
+    return 0;
+}
+
+void Cartridge::ppuWrite(uint16_t addr, uint8_t value)
+{
+    return;
 }
 

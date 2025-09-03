@@ -24,8 +24,8 @@ public:
     Bus(/* args */);
     ~Bus();
     void connect_cpu(mos6502* c);
-    uint8_t read(uint16_t addr);
-    void write(uint16_t addr, uint8_t data);
+    uint8_t cpuRead(uint16_t addr);
+    void cpuWrite(uint16_t addr, uint8_t data);
     void load_string(const std::string& assembled_program, const uint16_t start_address);
     void connect_cartridge(Cartridge* cart);
 };

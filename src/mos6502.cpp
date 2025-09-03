@@ -28,11 +28,11 @@ mos6502::~mos6502()
 }
 
 uint8_t mos6502::read(uint16_t addr) {
-    return bus->read(addr);
+    return bus->cpuRead(addr);
 }
 
 void mos6502::write(uint16_t addr, uint8_t data) {
-    bus->write(addr, data);
+    bus->cpuWrite(addr, data);
 }
 
 void mos6502::internal_work() {

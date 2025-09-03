@@ -116,7 +116,7 @@ void renderRamGrid(SDL_Renderer* renderer, mos6502& cpu, Bus& bus, const uint16_
         // --- Render each byte in the row ---
         for (int col = 0; col < cols; ++col) {
             uint16_t addr = addrLabel + col;
-            uint8_t value = bus.read(addr);
+            uint8_t value = bus.cpuRead(addr);
 
             std::stringstream ss;
             ss << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(value);

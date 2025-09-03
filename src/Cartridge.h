@@ -16,8 +16,10 @@ public:
 	Cartridge(Bus* bus);
 	~Cartridge();
 	void load_from_ines(const std::string filepath);
-	uint8_t read(uint16_t addr);
-	void write(uint16_t addr, uint8_t value);
+	uint8_t cpuRead(uint16_t addr);
+	void cpuWrite(uint16_t addr, uint8_t value);
+	uint8_t ppuRead(uint16_t addr);
+	void ppuWrite(uint16_t addr, uint8_t value);
 
 	struct InesHeader
 	{
