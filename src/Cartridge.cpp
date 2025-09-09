@@ -1,5 +1,3 @@
-#include "Cartridge.h"
-#include "Cartridge.h"
 #pragma once
 #include "Cartridge.h"
 #include "Bus.h"
@@ -10,6 +8,8 @@
 #include <cstring>
 #include <vector>
 #include <stdexcept>
+#include <Mapper.h>
+#include <Mapper_000.h>
 
 
 
@@ -26,10 +26,10 @@ void Cartridge::load_from_ines(const std::string filepath) {
         file.seekg(512, std::ios::cur); // skip trainer
     }
 
-    PRG.resize(16384 * header.prg);
-    CHR.resize(8192 * header.chr);
-    file.read(reinterpret_cast<char*>(PRG.data()), 16384 * header.prg);
-    file.read(reinterpret_cast<char*>(CHR.data()), 8192 * header.chr);
+    PRG_Vector.resize(16384 * header.prg);
+    CHR_Vector.resize(8192 * header.chr);
+    file.read(reinterpret_cast<char*>(PRG_Vector.data()), 16384 * header.prg);
+    file.read(reinterpret_cast<char*>(CHR_Vector.data()), 8192 * header.chr);
     file.close();
 }
 
@@ -37,11 +37,6 @@ void Cartridge::load_from_ines(const std::string filepath) {
 Cartridge::Cartridge()
 {
     bus = nullptr;
-}
-
-Cartridge::Cartridge(Bus* b)
-{
-    bus = b;
 }
 
 Cartridge::~Cartridge()
@@ -61,7 +56,7 @@ uint8_t Cartridge::cpuRead(uint16_t addr) {
             mapped_addr = addr - 0x8000;
         }
 
-        return PRG[mapped_addr];
+        return PRG_Vector[mapped_addr];
     }
 
     // If address is outside cartridge range, return open bus

@@ -25,7 +25,7 @@ int main()
 {
     Bus bus;
     mos6502 cpu = mos6502(&bus);
-    Cartridge nestest = Cartridge(&bus);
+    Cartridge nestest = Cartridge();
     nestest.load_from_ines("./assets/ROMs/nestest.nes");
     
     bus.connect_cpu(&cpu);

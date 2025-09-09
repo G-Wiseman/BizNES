@@ -13,7 +13,6 @@ private:
 	Bus* bus;
 public:
 	Cartridge();
-	Cartridge(Bus* bus);
 	~Cartridge();
 	void load_from_ines(const std::string filepath);
 	uint8_t cpuRead(uint16_t addr);
@@ -34,6 +33,6 @@ public:
 		uint8_t padding[5];
 
 	} header = { 0 };
-	std::vector<uint8_t> PRG = { 0 };
-	std::vector<uint8_t> CHR = { 0 };
+	std::vector<uint8_t> PRG_Vector = { 0 };
+	std::vector<uint8_t> CHR_Vector = { 0 };
 };
