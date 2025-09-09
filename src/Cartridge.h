@@ -3,6 +3,8 @@
 #include <string>
 #include <array> 
 #include <vector> 
+#include <memory>
+#include "Mapper.h"
 
 class Bus;
 
@@ -35,4 +37,6 @@ public:
 	} header = { 0 };
 	std::vector<uint8_t> PRG_Vector = { 0 };
 	std::vector<uint8_t> CHR_Vector = { 0 };
+
+	std::unique_ptr<Mapper> mapper; 
 };

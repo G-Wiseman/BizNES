@@ -31,6 +31,8 @@ void Cartridge::load_from_ines(const std::string filepath) {
     file.read(reinterpret_cast<char*>(PRG_Vector.data()), 16384 * header.prg);
     file.read(reinterpret_cast<char*>(CHR_Vector.data()), 8192 * header.chr);
     file.close();
+
+    mapper = std::make_unique<Mapper_000>(header.prg, header.chr);
 }
 
 
@@ -45,18 +47,11 @@ Cartridge::~Cartridge()
 
 uint8_t Cartridge::cpuRead(uint16_t addr) {
     if (addr >= 0x8000 && addr <= 0xFFFF) {
-        size_t mapped_addr;
-
-        if (header.prg == 1) {
-            // 16KB PRG ROM, mirror it
-            mapped_addr = addr & 0x3FFF; // mask to 16KB
+        bool approved = false;
+        size_t mapped_addr = mapper->cpuReadMapped(addr, approved);
+        if (approved) {
+            return PRG_Vector[mapped_addr];
         }
-        else {
-            // 32KB PRG ROM
-            mapped_addr = addr - 0x8000;
-        }
-
-        return PRG_Vector[mapped_addr];
     }
 
     // If address is outside cartridge range, return open bus
@@ -64,17 +59,32 @@ uint8_t Cartridge::cpuRead(uint16_t addr) {
 }
 
 void Cartridge::cpuWrite(uint16_t addr, uint8_t value) {
-    // TODO: Finish this function
+    bool approved = false;
+    size_t mapped_addr = mapper->cpuWriteMapped(addr, approved);
+    if (approved) {
+        PRG_Vector[mapped_addr] = value; // TODO: Is this correct? For mapper 0 it won't matter, come back when doing other mappers.
+    }
     return;
 }
 
 uint8_t Cartridge::ppuRead(uint16_t addr)
 {
-    return 0;
+    // TODO: double check this when you implement the PPU
+    bool approved = false;
+    size_t mapped_addr = mapper->ppuReadMapped(addr, approved);
+    if (approved) {
+        return CHR_Vector[mapped_addr];
+    }
+    return 0xff;
 }
 
 void Cartridge::ppuWrite(uint16_t addr, uint8_t value)
 {
-    return;
+    // TODO: double check this when you implement the PPU
+    bool approved = false;
+    size_t mapped_addr = mapper->ppuWriteMapped(addr, approved);
+    if (approved) {
+        CHR_Vector[mapped_addr] = value;
+    }
 }
 

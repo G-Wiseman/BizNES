@@ -1,28 +1,22 @@
 #pragma once 
-
 #include <cstdint>
 
 
 class Mapper
 {
 public:
-	Mapper();
-	~Mapper();
+	Mapper(uint8_t num_PRG, uint8_t num_CHR);
 
-	virtual uint8_t cpuRead(uint16_t addr) = 0;
-	virtual void cpuWrite(uint16_t addr, uint8_t data) = 0;
+	virtual size_t cpuReadMapped(uint16_t addr, bool& approved) = 0;
+	virtual size_t cpuWriteMapped(uint16_t addr, bool& approved) = 0;
 
-	virtual uint8_t ppuRead(uint16_t addr) = 0;
-	virtual void ppuWrite(uint16_t addr, uint8_t data) = 0;
+	virtual size_t ppuReadMapped(uint16_t addr, bool& approved) = 0;
+	virtual size_t ppuWriteMapped(uint16_t addr, bool& approved) = 0;
+
+	uint8_t num_PRG_banks; 
+	uint8_t num_CHR_banks; 
 
 private:
 
 };
 
-Mapper::Mapper()
-{
-}
-
-Mapper::~Mapper()
-{
-}
