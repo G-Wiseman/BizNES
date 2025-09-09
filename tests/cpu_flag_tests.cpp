@@ -93,8 +93,8 @@ TEST_CASE_METHOD(TestSetup,"Status Flag Set and Get") {
 
 TEST_CASE_METHOD(TestSetup, "SEI/CLI Test") {
     cpu->setPC(0x0000);
-    bus->write(0, 0x78); // SEC
-    bus->write(1, 0x58); // CLC
+    bus->cpuWrite(0, 0x78); // SEC
+    bus->cpuWrite(1, 0x58); // CLC
 
 
     cpu->step();
@@ -107,8 +107,8 @@ TEST_CASE_METHOD(TestSetup, "SEI/CLI Test") {
 
 TEST_CASE_METHOD(TestSetup, "SEC/CLC Test") {
     cpu->setPC(0x0000);
-    bus->write(0, 0x38); // SEC
-    bus->write(1, 0x18); // CLC
+    bus->cpuWrite(0, 0x38); // SEC
+    bus->cpuWrite(1, 0x18); // CLC
 
 
     cpu->step();
@@ -120,8 +120,8 @@ TEST_CASE_METHOD(TestSetup, "SEC/CLC Test") {
 
 TEST_CASE_METHOD(TestSetup, "SED/CLD Test") {
     cpu->setPC(0x0000);
-    bus->write(0, 0xF8); // SEC
-    bus->write(1, 0xD8); // CLC
+    bus->cpuWrite(0, 0xF8); // SEC
+    bus->cpuWrite(1, 0xD8); // CLC
     
     
     cpu->step();

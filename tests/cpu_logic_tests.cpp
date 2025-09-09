@@ -11,21 +11,21 @@ TEST_CASE_METHOD(TestSetup, "AND Tests") {
 	cpu->setPC(0x0000);
 	SECTION("Immediate Addressing") {
 		cpu->setAccumulator(0xf0);
-		bus->write(0, 0x29); bus->write(1, 0x0f); // AND #15 (ox0f)
+		bus->cpuWrite(0, 0x29); bus->cpuWrite(1, 0x0f); // AND #15 (ox0f)
 		cpu->step(); 
 		REQUIRE(cpu->getAccumulator() == 0x00);
 		CHECK(cpu->getFlag(mos6502::Z) == true);
 		CHECK(cpu->getFlag(mos6502::N) == false);
 
 		cpu->setAccumulator(0x0f);
-		bus->write(2, 0x29); bus->write(3, 0x0f);
+		bus->cpuWrite(2, 0x29); bus->cpuWrite(3, 0x0f);
 		cpu->step();
 		REQUIRE(cpu->getAccumulator() == 0x0f);
 		CHECK(cpu->getFlag(mos6502::Z) == false);
 		CHECK(cpu->getFlag(mos6502::N) == false);
 
 		cpu->setAccumulator(0xf0);
-		bus->write(4, 0x29); bus->write(5, 0xff);
+		bus->cpuWrite(4, 0x29); bus->cpuWrite(5, 0xff);
 		cpu->step();
 		REQUIRE(cpu->getAccumulator() == 0xf0);
 		CHECK(cpu->getFlag(mos6502::Z) == false);
@@ -36,7 +36,7 @@ TEST_CASE_METHOD(TestSetup, "AND Tests") {
 TEST_CASE_METHOD(TestSetup, "EOR Tests") {
 	cpu->setPC(0x0000);
 	SECTION("Absolute Addressing") {
-		bus->write(0x0011, 0b10000001);
+		bus->cpuWrite(0x0011, 0b10000001);
 		bus->load_string("4D 11 00", 0x0000); // EOR $0011
 
 		cpu->setAccumulator(0x0001);
@@ -51,7 +51,7 @@ TEST_CASE_METHOD(TestSetup, "EOR Tests") {
 TEST_CASE_METHOD(TestSetup, "ORA Tests") {
 	cpu->setPC(0x0000);
 	SECTION("Zeropage X") {
-		bus->write(0x0014, 0x10);
+		bus->cpuWrite(0x0014, 0x10);
 		bus->load_string("15 10", 0x0000); // EOR $0011
 		cpu->setXReg(4);
 
