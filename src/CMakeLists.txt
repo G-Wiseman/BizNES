@@ -8,7 +8,7 @@ add_library(NES_core
     "mos6502.cpp" "mos6502.h"
     "opcode.h" "opcode.cpp"
     "opcode_lookup.cpp" 
- "Cartridge.cpp" "Cartridge.h"   "Mapper.h" "Mapper_000.h" "Mapper_000.cpp" "Mapper.cpp")
+ "Cartridge.cpp" "Cartridge.h"   "Mapper.h" "Mapper_000.h" "Mapper_000.cpp" "Mapper.cpp" "PPU.h" "PPU.cpp")
 
 add_executable (NES_Emulator "NES_Emulator.cpp" "NES_Emulator.h" )
 target_link_libraries(NES_Emulator PRIVATE NES_core)

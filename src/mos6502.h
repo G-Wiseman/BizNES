@@ -13,8 +13,12 @@ class Bus; // forward declaration that allows cpu to know that bus will exist
 
 class mos6502
 {
-private:
-    Bus* bus;
+public: 
+    mos6502();
+    mos6502(Bus* b);
+
+private: // registers
+
     // Registers
     uint8_t a = 0x00; // accumulator register
     uint8_t x = 0x00; // x register
@@ -22,8 +26,9 @@ private:
     uint8_t s = 0x00; // stack pointer register
     uint16_t pc = 0x0000; // program counter
     uint8_t status = 0x00; // status register (see Enum for bits)
-    
-    // internal variables 
+ 
+private: // internal variables 
+    Bus* bus;
     bool address_was_implied = false;
 
     const Opcode* cur_opcode = nullptr; 
@@ -73,8 +78,6 @@ public:
     uint16_t execute_addressing(const Opcode& op);
     uint8_t execute_instruction(const Opcode& op);
 
-    mos6502();
-    mos6502(Bus* b);
     ~mos6502();
     uint8_t read(uint16_t addr);
     void write(uint16_t addr, uint8_t data);
