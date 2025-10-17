@@ -26,11 +26,45 @@ void PPU::write(uint16_t addr14bit, uint8_t value) {
 
 uint8_t PPU::cpuRead(uint16_t addr) {
 	addr = addr % 8; // deals with mirroring
+	switch (addr) {
+	case 0:
+	case 1:
+		break;
+	case 2:
+		return ppu_status_read();
+	case 3:
+		break;
+	case 4:
+		return oam_data_read();
+	case 5:
+	case 6:
+		break;
+	case 7:
+		return ppu_data_read();
+	}
 	return 0xff;
 }
 
-void PPU::cpuWrite(uint16_t addr, uint8_t value) {
+void PPU::cpuWrite(uint16_t addr, uint8_t data) {
 	addr = addr % 8; // deals with mirroring
+	switch (addr) {
+	case 0:
+		ppu_ctrl_write(data);
+	case 1:
+		ppu_mask_write(data);
+	case 2:
+		break;
+	case 3:
+		oam_addr_write(data);
+	case 4:
+		oam_data_write(data);
+	case 5:
+		ppu_scroll_write(data);
+	case 6: 
+		ppu_addr_write(data);
+	case 7:
+		ppu_data_write(data);
+	}
 }
 
 void PPU::clock() {
@@ -82,3 +116,34 @@ void PPU::visible_scanline() {
 	}
 }
 
+
+void PPU::ppu_ctrl_write(uint8_t data) {
+
+}
+void PPU::ppu_mask_write(uint8_t data) {
+
+}
+uint8_t PPU::ppu_status_read() {
+	return 0xff;
+}
+void PPU::oam_addr_write(uint8_t data) {
+
+}
+void PPU::oam_data_write(uint8_t data) {
+
+}
+uint8_t PPU::oam_data_read() {
+	return 0xff;
+}
+void PPU::ppu_scroll_write(uint8_t data) {
+
+}
+void PPU::ppu_addr_write(uint8_t data) {
+
+}
+void PPU::ppu_data_write(uint8_t data) {
+
+}
+uint8_t PPU::ppu_data_read() {
+	return 0xff;
+}
