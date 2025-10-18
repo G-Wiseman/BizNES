@@ -41,6 +41,10 @@ private: // counting where the PPU is at in its cycle
 	int16_t cycle = 0;
 
 private: // Internal registers
+	uint16_t v = 0; 
+	uint16_t t = 0;
+	uint16_t x = 0; 
+	uint8_t write_toggle = 0;
 
 public: 
 	// a list of every pixel to render on screen. It will update one of these on a cycle? 

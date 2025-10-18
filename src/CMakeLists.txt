@@ -3,30 +3,27 @@
 #
 
 # Add source to this project's executable.
-add_library(NES_core
+add_library(NES_Core
     "Bus.cpp" "Bus.h" 
     "mos6502.cpp" "mos6502.h"
     "opcode.h" "opcode.cpp"
     "opcode_lookup.cpp" 
- "Cartridge.cpp" "Cartridge.h"   "Mapper.h" "Mapper_000.h" "Mapper_000.cpp" "Mapper.cpp" "PPU.h" "PPU.cpp")
-
-add_executable (NES_Emulator "NES_Emulator.cpp" "NES_Emulator.h" )
-target_link_libraries(NES_Emulator PRIVATE NES_core)
+ "Cartridge.cpp" "Cartridge.h"   "Mapper.h" "Mapper_000.h" "Mapper_000.cpp" "Mapper.cpp" "PPU.h" "PPU.cpp" "BizNesDisplay.h" "BizNesDisplay.cpp")
 
 find_package(SDL3 CONFIG REQUIRED)
-target_link_libraries(NES_Emulator PRIVATE SDL3::SDL3)
-
-
 find_package(SDL3_ttf CONFIG REQUIRED)
-target_link_libraries(NES_Emulator PRIVATE SDL3_ttf::SDL3_ttf)
+target_link_libraries(NES_Core PRIVATE SDL3::SDL3 SDL3_ttf::SDL3_ttf)
 
-target_include_directories(NES_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+add_executable (NES_Emulator "main.cpp")
+target_link_libraries(NES_Emulator PRIVATE NES_Core)
+target_link_libraries(NES_Emulator PRIVATE SDL3::SDL3 SDL3_ttf::SDL3_ttf)
+
+target_include_directories(NES_Core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET NES_Emulator PROPERTY CXX_STANDARD 23)
 endif()
 
-# TODO: Add tests and install targets if needed.
 # Copy font file to output directory after build
 set(FONT_FILE "${CMAKE_SOURCE_DIR}/assets/fonts/Ticketing.ttf")
 set(FONT_DEST_DIR "${CMAKE_CURRENT_BINARY_DIR}/assets/fonts")
