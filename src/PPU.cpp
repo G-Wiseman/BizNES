@@ -30,17 +30,25 @@ uint8_t PPU::cpuRead(uint16_t addr) {
 	case 0:
 	case 1:
 		break;
+
 	case 2:
 		return ppu_status_read();
+		break;
+
 	case 3:
 		break;
+
 	case 4:
 		return oam_data_read();
+		break;
+
 	case 5:
 	case 6:
 		break;
+
 	case 7:
 		return ppu_data_read();
+		break;
 	}
 	return 0xff;
 }
@@ -50,20 +58,33 @@ void PPU::cpuWrite(uint16_t addr, uint8_t data) {
 	switch (addr) {
 	case 0:
 		ppu_ctrl_write(data);
+		break;
 	case 1:
 		ppu_mask_write(data);
+		break;
+
 	case 2:
 		break;
+
 	case 3:
 		oam_addr_write(data);
+		break;
+
 	case 4:
 		oam_data_write(data);
+		break;
+
 	case 5:
 		ppu_scroll_write(data);
+		break;
+
 	case 6: 
 		ppu_addr_write(data);
+		break;
+
 	case 7:
 		ppu_data_write(data);
+		break;
 	}
 }
 
