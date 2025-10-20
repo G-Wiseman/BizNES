@@ -11,7 +11,7 @@ Opcode::Opcode() :
 }
 
 Opcode::Opcode(
-    char* name,
+    const char* name,
     AddrMode addr_enum,
     uint16_t(mos6502::* addr)(),
     uint8_t(mos6502::* inst)(),
