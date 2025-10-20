@@ -1,5 +1,5 @@
 {
-  "builtin-baseline": "1e7a3163f4d38cda066c6cff47d8d1c910711415",
+  "builtin-baseline": "74e6536215718009aae747d86d84b78376bf9e09",
   "dependencies": [
     "catch2",
     "sdl3",

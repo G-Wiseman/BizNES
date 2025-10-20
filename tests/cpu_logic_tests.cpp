@@ -63,7 +63,3 @@ TEST_CASE_METHOD(TestSetup, "ORA Tests") {
 
 	}
 }
-
-TEST_CASE_METHOD(TestSetup, "BIT Tests") {
-
-}

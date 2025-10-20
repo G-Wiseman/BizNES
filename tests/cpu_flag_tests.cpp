@@ -101,7 +101,7 @@ TEST_CASE_METHOD(TestSetup, "SEI/CLI Test") {
     REQUIRE(cpu->getFlag(mos6502::STATUS_FLAG_MASKS::I));
 
     cpu->step();
-    REQUIRE(~cpu->getFlag(mos6502::STATUS_FLAG_MASKS::I));
+    REQUIRE(!cpu->getFlag(mos6502::STATUS_FLAG_MASKS::I));
 }
 
 
@@ -115,7 +115,7 @@ TEST_CASE_METHOD(TestSetup, "SEC/CLC Test") {
     REQUIRE(cpu->getFlag(mos6502::STATUS_FLAG_MASKS::C));
 
     cpu->step();
-    REQUIRE(~cpu->getFlag(mos6502::STATUS_FLAG_MASKS::C));
+    REQUIRE(!cpu->getFlag(mos6502::STATUS_FLAG_MASKS::C));
 }
 
 TEST_CASE_METHOD(TestSetup, "SED/CLD Test") {
@@ -128,6 +128,6 @@ TEST_CASE_METHOD(TestSetup, "SED/CLD Test") {
     REQUIRE(cpu->getFlag(mos6502::STATUS_FLAG_MASKS::D));
 
     cpu->step();
-    REQUIRE(~cpu->getFlag(mos6502::STATUS_FLAG_MASKS::D));
+    REQUIRE(!cpu->getFlag(mos6502::STATUS_FLAG_MASKS::D));
 }
 
