@@ -37,8 +37,8 @@ add_custom_command(
     COMMAND ${CMAKE_COMMAND} -E copy_if_different "${FONT_FILE}" "${FONT_DEST_DIR}/Ticketing.ttf"
 )
 
-add_custom_command(
-    TARGET NES_Emulator POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E make_directory "${NESTEST_FILE_DEST}"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different "${NESTEST_FILE}" "${NESTEST_FILE_DEST}/nestest.nes"
-)
+# add_custom_command(
+#    TARGET NES_Emulator POST_BUILD
+#    COMMAND ${CMAKE_COMMAND} -E make_directory "${NESTEST_FILE_DEST}"
+#    COMMAND ${CMAKE_COMMAND} -E copy_if_different "${NESTEST_FILE}" "${NESTEST_FILE_DEST}/nestest.nes"
+# )
