@@ -72,6 +72,9 @@ vcpkg_installed/
 #ROMs
 assets/ROMs
 
+#output
+builds/
+
 #LibreOffice files
 *.ods
 
