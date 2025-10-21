@@ -26,6 +26,14 @@ jobs:
         restore-keys: |
           vcpkg-${{ runner.os }}-
 
+    - name: Cache vcpkg binary archives
+      uses: actions/cache@v3
+      with:
+        path: C:\Users\runneradmin\AppData\Local\vcpkg\archives
+        key: vcpkg-bin-${{ runner.os }}-${{ hashFiles('**/vcpkg.json') }}
+        restore-keys: |
+          vcpkg-bin-${{ runner.os }}-
+
     - name: Set up MSVC Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1
 
