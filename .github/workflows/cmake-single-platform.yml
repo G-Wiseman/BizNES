@@ -16,15 +16,15 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Cache vcpkg installed packages
-      uses: actions/cache@v3
-      with:
-        path: |
-          vcpkg/installed
-          vcpkg/downloads
-        key: vcpkg-${{ runner.os }}-${{ hashFiles('**/vcpkg.json') }}
-        restore-keys: |
-          vcpkg-${{ runner.os }}-
+    # - name: Cache vcpkg installed packages
+    #   uses: actions/cache@v3
+    #   with:
+    #     path: |
+    #       vcpkg/installed
+    #       vcpkg/downloads
+    #     key: vcpkg-${{ runner.os }}-${{ hashFiles('**/vcpkg.json') }}
+    #     restore-keys: |
+    #       vcpkg-${{ runner.os }}-
 
     - name: Cache vcpkg binary archives
       uses: actions/cache@v3
